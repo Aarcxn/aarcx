@@ -3,22 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/dd28350b18.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style/style.css">
-    <title>Aaron</title>
+    <title>Aaron Annis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none; /* no underline */
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f1ab13, #facefa, #1a2a6c);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .business-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            padding: 25px;
+        }
+        
+        .quadrant {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .quadrant:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .headshot {
+            background: linear-gradient(45deg, #4db8ff, #552868);
+            grid-column: 1;
+            grid-row: 1 / span 2;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .bio {
+            background: linear-gradient(45deg, #2ecc71, #f1c40f);
+            grid-column: 2;
+            grid-row: 1;
+        }
+        
+        .links {
+            background: linear-gradient(45deg, #e74c3c, #e67e22);
+            grid-column: 2;
+            grid-row: 2;
+        }
+        
+        .stats {
+            background: linear-gradient(45deg, #9b59b6, #1abc9c);
+            grid-column: 1 / span 2;
+            grid-row: 2;
+        }
+        
+        .headshot-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .name {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .title {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            color: white;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        
+        .contact-info i {
+            margin-right: 8px;
+        }
+        
+        h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .bio-content {
+            color: white;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            flex-grow: 1;
+        }
+        
+        .link-item {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .link-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .link-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            flex-grow: 1;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .business-card {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+                height: auto;
+            }
+            
+            .headshot {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            
+            .bio {
+                grid-column: 1;
+                grid-row: 2;
+            }
+            
+            .links {
+                grid-column: 1;
+                grid-row: 3;
+            }
+            
+            .stats {
+                grid-column: 1;
+                grid-row: 4;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Aaron</h1>
-    <p>Aaron blends IT with a love for photography, motorsport & coding. A curious traveler and creative thinker, he’s all about capturing moments that matter. Grounded yet adventurous, embracing every challenge with a fresh perspective.</p>
-    <h2>Socials</h2>
-    <ul>
-        <li><a href="https://a-a.ac/">Website</a></li>
-        <li><a href="mailto:aaron@a-a.ac">Email</a></li>
-    </ul>
-    <div id="links">
-        <a class="link" href="https://www.linkedin.com/in/aaron-annis/">
-            <i class="fa-brands fa-linkedin"></i>Linkedin
-        </a>
-    </div>
-</body>
-</html>
+    <div class="business-card">
+        <!-- Quadrant 1: Headshot -->
+        <div class="quadrant headshot">
+            <div class="headshot-content">
+                <img src="https://media.licdn.com/dms/image/v2/D4E03AQG-HRIhCYSQRw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1709827334428?e=1756339200&v=beta&t=vWPW0c8NSxV0A0FZes8cIqKqmPuHQYK4I3_wcjPHBtM" alt="Profile Photo" class="profile-img">
+                <h1 class="name">Aaron Annis</h1>
+                <div class="title">Service & Support analyst</div>
+                <div class="contact-info">
+                    <div><a href="mailto:aaron@a-a.ac"><i class="fas fa-envelope"></i> Email</a></div>
+                    <div><i class="fas fa-map-marker-alt"></i> York, UK</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quadrant 2: Short Bio -->
+        <div class="quadrant bio">
+            <h2>About Me</h2>
+            <div class="bio-content">
+                <p>I blend IT with a love for photography, motorsport & coding. A curious traveler and creative thinker, I'm all about capturing moments that matter. Grounded yet adventurous, embracing every challenge with a fresh perspective.</p>
+            </div>
+        </div>
+        
+        <!-- Quadrant 3: Social Links -->
+        <div class="quadrant links">
+            <h2>Connect With Me</h2>
+            <div class="links-grid">
+                <a href="https://www.linkedin.com/in/aaron-annis/" class="link-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/Aarcxn" class="link-item">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://www.instagram.com/aarcxn" class="link-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://aarcxn.substack.com/" class="link-item">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span>Substack</span>
+                </a>
+            </div>
+        </div>
